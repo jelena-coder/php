@@ -81,8 +81,11 @@
             )
         })
     })
-   
+    //fali!
 
   
 
 </script>
+<?php
+    include 'futer.php';
+?>
