@@ -61,6 +61,16 @@
 
     })
     }
+    function ucitajProizvode() {
+        $.getJSON('server/proizvod/read.php', (res => {
+            if (!res.status) {
+                alert(res.error);
+                return;
+            }
+            proizvodi = res.kolekcija || [];
+            render();
+        }))
+    }
     function obrisi(id) {
         id = Number(id);
         $.post('server/proizvod/delete.php', { id }).then(res => {
