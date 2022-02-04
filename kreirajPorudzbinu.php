@@ -4,7 +4,7 @@
 
 <div class='container mt-2 mb-5'>
     <h1 class='text-center text-dark'>
-        Kreiraj novu narudzbinu
+        Kreiraj novu porudzbinu
     </h1>
     <div class='row mt-2 d-flex justify-content-center'>
         <div class='col-7'>
@@ -41,7 +41,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    
     $(function () {
         ucitajOptions('server/boja/read.php', 'boja');
         ucitajOptions('server/kategorija/read.php', 'kategorija');
@@ -81,6 +80,7 @@
             )
         })
     })
+
     function ucitajOptions(url, htmlElement) {
         $.getJSON(url).then(res => {
             if (!res.status) {
@@ -97,9 +97,8 @@
         })
     }
 
-  
-
 </script>
+
 <?php
     include 'futer.php';
 ?>
