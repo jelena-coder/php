@@ -45,7 +45,53 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    let kategorije = [];
+    let selIndex = -1;
 
+    $(function () {
+        ucitajKategorije();
+        $('#forma').submit(e => {
+            e.preventDefault();
+            const naziv = $('#naziv').val();
+            if (selIndex === -1) {
+                $.post('server/kategorija/create.php', { naziv }).then(res => {
+                    res = JSON.parse(res);
+                    if (!res.status) {
+                        alert(res.error);
+                    } else {
+                        ucitajKategorije();
+                    }
+                })
+            } else {
+                $.post('server/kategorija/update.php', { naziv, id: kategorije[selIndex].id }).then(res => {
+                    res = JSON.parse(res);
+                    if (!res.status) {
+                        alert(res.error);
+                    } else {
+                        setKategorije(kategorije.map((element, index) => {
+                            if (index !== selIndex) {
+                                return element;
+                            }
+                            return { id: element.id, naziv };
+                        }));
+                        setIndex(-1);
+                    }
+                })
+            }
+        })
+    })
+    function ucitajKategorije() {
+        $.getJSON('server/kategorija/read.php').then(res => {
+
+            if (!res.status) {
+                alert(res.error);
+                return;
+            }
+            setKategorije(res.kolekcija);
+        })
+    }
+</script>
 <?php
     include 'futer.php';
 ?>
