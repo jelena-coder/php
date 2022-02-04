@@ -42,7 +42,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     
+    $(function () {
+        ucitajOptions('server/boja/read.php', 'boja');
+        ucitajOptions('server/kategorija/read.php', 'kategorija');
+        $('#forma').submit(e => {
 
+            e.preventDefault();
+
+            const naziv = $('#naziv').val();
+            const cena = $('#cena').val();
+            const boja = $('#boja').val();
+            const kategorija = $('#kategorija').val();
+            const opis = $('#opis').val();
+            const slika = $("#slika")[0].files[0];
+            const fd = new FormData();
+            fd.append("slika", slika);
+            fd.append("naziv", naziv);
+            fd.append("opis", opis);
+            fd.append("cena", cena);
+            fd.append("boja", boja);
+            fd.append("kategorija", kategorija);
+            $.ajax(
+                {
+                    url: "./server/porudzbina/create.php",
+                    type: 'post',
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (!data.status) {
+                            alert(data.error);
+                        }
+
+                    },
+
+                }
+            )
+        })
+    })
    
 
   
