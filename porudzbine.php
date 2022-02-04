@@ -4,7 +4,7 @@
 
 <div class='container mt-2'>
     <h1 class='text-center text-dark'>
-        Torte i kolaci 
+        Torte i kolaci
     </h1>
     <div class="row mt-2">
         <div class="col-3">
@@ -60,9 +60,11 @@
 
 
     })
-    }
+
+
+
     function ucitajProizvode() {
-        $.getJSON('server/proizvod/read.php', (res => {
+        $.getJSON('server/porudzbina/read.php', (res => {
             if (!res.status) {
                 alert(res.error);
                 return;
@@ -71,9 +73,51 @@
             render();
         }))
     }
+    function render() {
+        const search = $('#search').val();
+        const sort = Number($('#sort').val());
+        const kat = Number($('#kategorije').val());
+        const niz = proizvodi.filter(element => {
+            return (kat == 0 || element.kategorija == kat) && element.naziv.includes(search)
+        }).sort((a, b) => {
+            return (a.cena > b.cena) ? sort : 0 - sort;
+        });
+        let red = 0;
+        let kolona = 0;
+        $('#podaci').html(`<div id='row-${red}' class='row mt-2'></div>`)
+        for (let proizvod of niz) {
+            if (kolona === 4) {
+                kolona = 0;
+                red++;
+                $('#podaci').append(`<div id='row-${red}' class='row mt-2'></div>`)
+            }
+            $(`#row-${red}`).append(
+                `
+                        <div class='col-3 pt-2 bg-white'>
+                            <div class="card" >
+                                <img class="card-img-top" src="${proizvod.slika}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h6 class="card-title">Naziv: ${proizvod.naziv}</h6>
+                                    <h6 class="card-title">Cena: ${proizvod.cena}</h6>
+                                    <h6 class="card-title">Kategorija: ${kategorije.find(element => element.id === proizvod.kategorija).naziv}</h6>
+                                    <h6 class="card-title">Boja: ${boje.find(element => element.id === proizvod.boja).naziv}</h6>
+                                   <b>Opis:</b>
+                                    <p class="card-text">${proizvod.opis}</p>
+                                </div>
+                                <div class="card-footer ">
+                                    <button class='btn btn-danger form-control' onClick="obrisi(${proizvod.id})">Obrisi</button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+            )
+            kolona++;
+        }
+
+    }
     function obrisi(id) {
         id = Number(id);
-        $.post('server/proizvod/delete.php', { id }).then(res => {
+        $.post('server/porudzbina/delete.php', { id }).then(res => {
             res = JSON.parse(res);
             if (!res.status) {
                 alert(res.error);
