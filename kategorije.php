@@ -91,6 +91,18 @@
             setKategorije(res.kolekcija);
         })
     }
+    function obrisi(id) {
+        $.post('server/kategorija/delete.php', { id }).then((res) => {
+            res = JSON.parse(res);
+            if (!res.status) {
+                alert(res.error);
+                return;
+            }
+            setKategorije(kategorije.filter((e) => e.id != id));
+
+            setIndex(-1);
+        })
+    }
 </script>
 <?php
     include 'futer.php';
