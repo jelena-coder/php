@@ -20,7 +20,7 @@ USE `kolaci`;
 
 DROP TABLE IF EXISTS `boja`;
 
-CREATE TABLE `boje` (
+CREATE TABLE `boja` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `naziv` VARCHAR(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -28,7 +28,7 @@ CREATE TABLE `boje` (
 
 /*Data for the table `boja` */
 
-INSERT  INTO `boje`(`id`,`naziv`) VALUES 
+INSERT  INTO `boja`(`id`,`naziv`) VALUES 
 (1,'zuta'),
 (2,'bela'),
 (3,'roze'),
@@ -63,18 +63,18 @@ CREATE TABLE `proizvod` (
   `cena` DECIMAL(9,2) NOT NULL,
   `opis` VARCHAR(90) NOT NULL,
   `kategorija` BIGINT DEFAULT NULL,
-  `boje` BIGINT DEFAULT NULL,
+  `boja` BIGINT DEFAULT NULL,
   `slika` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `kategorija` (`kategorija`),
-  KEY `boje` (`boje`),
+  KEY `boja` (`boja`),
   CONSTRAINT `proizvod_ibfk_1` FOREIGN KEY (`kategorija`) REFERENCES `kategorija` (`id`),
-  CONSTRAINT `proizvod_ibfk_2` FOREIGN KEY (`boje`) REFERENCES `boje` (`id`)
+  CONSTRAINT `proizvod_ibfk_2` FOREIGN KEY (`boja`) REFERENCES `boja` (`id`)
 );
 
 /*Data for the table `proizvod` */
 
-INSERT  INTO `proizvod`(`id`,`naziv`,`cena`,`opis`,`kategorija`,`boje`,`slika`) VALUES 
+INSERT  INTO `proizvod`(`id`,`naziv`,`cena`,`opis`,`kategorija`,`boja`,`slika`) VALUES 
 (5,'Dobos torta',2000,'ukusno',1,1,'./img/kolac.jpg'),
 (6,'Cokoladna torta',3000,'slatko',1,1,'./img/torta.jpg');
 
