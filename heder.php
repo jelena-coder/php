@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/slike.css">
     <title>Kolaci</title>
 </head>
 
@@ -28,10 +30,10 @@
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item mx-auto">
-                    <a class="nav-link" href="proizvodi.php">Porudzbina</a>
+                    <a class="nav-link" href="porudzbine.php">Porudzbina</a>
                 </li>
                 <li class="nav-item mx-auto">
-                    <a class="nav-link" href="kreirajProizvod.php">Kreiraj porudzbinu</a>
+                    <a class="nav-link" href="kreirajPorudzbinu.php">Kreiraj porudzbinu</a>
                 </li>
                 <li class="nav-item mx-auto">
                     <a class="nav-link" href="kategorije.php">Kategorije</a>
