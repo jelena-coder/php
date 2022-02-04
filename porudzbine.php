@@ -29,7 +29,37 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-  
+    let proizvodi = [];
+    let kategorije = [];
+    let boje = [];
+    $(function () {
+        $.getJSON('server/kategorija/read.php').then((res => {
+            if (!res.status) {
+                alert(res.error);
+                return;
+            }
+            kategorije = res.kolekcija;
+            for (let kat of kategorije) {
+                $('#kategorije').append(`
+                <option value="${kat.id}"> ${kat.naziv}</option>
+                `)
+            }
+        }))
+            .then(() => {
+                return $.getJSON('server/boja/read.php')
+
+            }).then((res => {
+                if (!res.status) {
+                    alert(res.error);
+                    return;
+                }
+                boje = res.kolekcija;
+
+            }))
+            .then(ucitajProizvode)
+
+
+    })
     }
     function obrisi(id) {
         id = Number(id);
