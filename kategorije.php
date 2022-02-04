@@ -103,6 +103,39 @@
             setIndex(-1);
         })
     }
+    function setKategorije(val) {
+        kategorije = val;
+        $('#kategorije').html('');
+
+        let index = 0;
+        for (let kategorija of kategorije) {
+            $('#kategorije').append(`
+                    <tr>
+                        <td>${kategorija.id}</td>
+                        <td>${kategorija.naziv}</td>
+                        <td>
+                            <button class='btn btn-light form-control' onClick="setIndex(${index})" >Izmeni</button>
+                        </td>
+                        <td>
+                            <button class='btn btn-danger form-control' onClick="obrisi(${kategorija.id})">Obrisi</button>
+                        </td>
+                    </tr>
+                `);
+            index++;
+        }
+    }
+    function setIndex(val) {
+        selIndex = val
+        if (selIndex === -1) {
+            $('#naslov').html('Kreiraj kategoriju');
+            $('#naziv').val('');
+
+        } else {
+            $('#naslov').html('Izmeni kategoriju')
+            $('#naziv').val(kategorije[selIndex].naziv);
+        }
+        $('#vrati').attr('hidden', selIndex === -1)
+    }
 </script>
 <?php
     include 'futer.php';
